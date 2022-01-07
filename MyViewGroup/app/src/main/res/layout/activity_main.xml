@@ -7,11 +7,11 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
-<!--    <com.jingom.myviewgroup.FlowLayout-->
-<!--            android:id="@+id/flowLayout"-->
-<!--            app:maxLineCount="3"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content" />-->
+    <com.jingom.myviewgroup.FlowLayout
+            android:id="@+id/flowLayout"
+            app:maxLineCount="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
 <!--    <com.jingom.myviewgroup.MyViewGroup-->
 <!--            android:id="@+id/myViewGroup"-->
@@ -19,15 +19,15 @@
 <!--            android:layout_height="match_parent"/>-->
 
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/teal_700"
-            android:text="sdf" />
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/black"
-            android:text="test" />
+<!--    <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/teal_700"-->
+<!--            android:text="sdf" />-->
+<!--    <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@color/black"-->
+<!--            android:text="test" />-->
 
 </LinearLayout>

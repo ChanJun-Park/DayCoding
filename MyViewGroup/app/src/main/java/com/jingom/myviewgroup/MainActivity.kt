@@ -7,11 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
+
+		val timeZone = TimeZone.getTimeZone("한국 표준시")
 
 		val flowLayout: FlowLayout = findViewById(R.id.flowLayout)
 		val layoutInflater = LayoutInflater.from(this)
