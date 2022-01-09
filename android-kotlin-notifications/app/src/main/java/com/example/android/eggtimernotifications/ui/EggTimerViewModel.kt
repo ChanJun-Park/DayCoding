@@ -19,6 +19,7 @@ package com.example.android.eggtimernotifications.ui
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.CountDownTimer
 import android.os.SystemClock
 import androidx.core.app.AlarmManagerCompat
@@ -66,14 +67,22 @@ class EggTimerViewModel(private val app: Application) : AndroidViewModel(app) {
             getApplication(),
             REQUEST_CODE,
             notifyIntent,
-            PendingIntent.FLAG_NO_CREATE
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_NO_CREATE
+            } else {
+                PendingIntent.FLAG_NO_CREATE
+            }
         ) != null
 
         notifyPendingIntent = PendingIntent.getBroadcast(
             getApplication(),
             REQUEST_CODE,
             notifyIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            } else {
+                PendingIntent.FLAG_UPDATE_CURRENT
+            }
         )
 
         timerLengthOptions = app.resources.getIntArray(R.array.minutes_array)
