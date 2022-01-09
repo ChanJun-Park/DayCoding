@@ -16,8 +16,9 @@ class AlarmReceiver: BroadcastReceiver() {
 		val notificationManager = ContextCompat.getSystemService(
 			context,
 			NotificationManager::class.java
-		)
-		notificationManager?.sendNotification(
+		) as NotificationManager
+
+		notificationManager.sendNotification(
 			context.getString(R.string.eggs_ready),
 			context
 		)
