@@ -27,6 +27,8 @@
                 android:id="@+id/motion_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:minHeight="80dp"
+                app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed"
                 app:layoutDescription="@xml/step8"
                 app:motionDebug="SHOW_PATH" >
 
@@ -59,6 +61,14 @@
                     android:textSize="24sp"
                     android:textColor="?colorOnPrimary" />
         </androidx.constraintlayout.motion.widget.MotionLayout>
+
+<!--        <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:minHeight="80dp"-->
+<!--                android:background="@android:color/holo_blue_bright"-->
+<!--                app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed"-->
+<!--                />-->
     </com.google.android.material.appbar.AppBarLayout>
     
     <androidx.core.widget.NestedScrollView
