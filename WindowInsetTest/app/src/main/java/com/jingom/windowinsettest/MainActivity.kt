@@ -3,9 +3,9 @@ package com.jingom.windowinsettest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.jingom.windowinsettest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -14,7 +14,8 @@ class MainActivity : AppCompatActivity() {
 
 	private var originStatusBarColor: Int = 0
 	private var originNaviBarColor: Int = 0
-	private var originSystemUiVisibility: Int = 0
+	private var originAppearanceLightStatusBar: Boolean = false
+	private var originAppearanceLightNaviBar: Boolean = false
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -25,14 +26,23 @@ class MainActivity : AppCompatActivity() {
 
 		originStatusBarColor = window.statusBarColor
 		originNaviBarColor = window.navigationBarColor
-		originSystemUiVisibility = window.decorView.systemUiVisibility
+
+		val windowInsetsController = WindowInsetsControllerCompat(window, binding.root)
+		originAppearanceLightStatusBar = windowInsetsController.isAppearanceLightStatusBars
+		originAppearanceLightNaviBar = windowInsetsController.isAppearanceLightNavigationBars
 	}
 
 	private fun setOnClickListener() {
 		binding.resetButton.setOnClickListener {
-			window.statusBarColor = originStatusBarColor
-			window.navigationBarColor = originNaviBarColor
-			window.decorView.systemUiVisibility = originSystemUiVisibility
+			window.apply {
+				statusBarColor = originStatusBarColor
+				navigationBarColor = originNaviBarColor
+			}
+
+			WindowInsetsControllerCompat(window, it).apply {
+				isAppearanceLightStatusBars = originAppearanceLightStatusBar
+				isAppearanceLightNavigationBars = originAppearanceLightNaviBar
+			}
 		}
 
 		binding.statusBarColorRedButton.setOnClickListener {
@@ -48,11 +58,15 @@ class MainActivity : AppCompatActivity() {
 		}
 
 		binding.statusBarTextColorOnLightButton.setOnClickListener {
-			window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+			val windowInsetsController = WindowInsetsControllerCompat(window, it)
+
+			windowInsetsController.isAppearanceLightStatusBars = true
 		}
 
 		binding.statusBarTextColorOnDarkButton.setOnClickListener {
-			window.decorView.systemUiVisibility = window.decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
+			val windowInsetsController = WindowInsetsControllerCompat(window, it)
+
+			windowInsetsController.isAppearanceLightStatusBars = false
 		}
 
 		binding.naviBarColorRedButton.setOnClickListener {
@@ -68,19 +82,20 @@ class MainActivity : AppCompatActivity() {
 		}
 
 		binding.naviBarUiColorOnLightButton.setOnClickListener {
-			window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+			val windowInsetsController = WindowInsetsControllerCompat(window, it)
+
+			windowInsetsController.isAppearanceLightNavigationBars = true
 		}
 
 		binding.naviBarUiColorOnDarkButton.setOnClickListener {
-			window.decorView.systemUiVisibility = window.decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
+			val windowInsetsController = WindowInsetsControllerCompat(window, it)
+
+			windowInsetsController.isAppearanceLightNavigationBars = false
 		}
 
 	}
 
 	private fun initCustomSystemUiColorSetting() {
-		// clear FLAG_TRANSLUCENT_STATUS flag:
-		window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-
 		// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
 		window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
 	}
